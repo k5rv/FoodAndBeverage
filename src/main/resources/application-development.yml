@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: foodandbeverage
+  cloud:
+    openfeign:
+      client:
+        config:
+          restaurant:
+            url: https://us-central1-testomate-test.cloudfunctions.net/api
+            logger-level: full
+logging:
+  level:
+    com.foodandbeverage: INFO
+    com.foodandbeverage.client.RestaurantClient: INFO
