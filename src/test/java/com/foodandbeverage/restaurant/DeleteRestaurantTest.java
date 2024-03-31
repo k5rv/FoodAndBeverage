@@ -24,10 +24,6 @@ class DeleteRestaurantTest {
   private static final String ERROR_RESTAURANT_WITH_GIVEN_ID_NOT_FOUND =
       "\"error\":\"restaurant with given id not found\"";
 
-  private static final String ERROR_RESTAURANT_DELETION_FAILED_REQUIRED_FIELDS_ARE_MISSING =
-      "\"error\":\"restaurant deletion failed required fields are missing\"";
-  private static final String STATUS_400 = "\"status\":400";
-
   @Autowired private RestaurantClient underTest;
 
   @Autowired private RestaurantMapper mapper;

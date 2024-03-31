@@ -20,10 +20,6 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest()
 class CreateRestaurantTest {
 
-  private static final String STATUS_409 = "\"status\":409";
-  private static final String ERROR_RESTAURANT_WITH_GIVEN_ID_ALREADY_EXIST =
-      "\"error\":\"restaurant with given id not found\"";
-
   private static final String STATUS_400 = "\"status\":400";
   private static final String ERROR_RESTAURANT_CREATION_FAILED_REQUIRED_FIELDS_ARE_MISSING =
       "\"error\":\"restaurant creation failed required fields are missing\"";
@@ -69,7 +65,8 @@ class CreateRestaurantTest {
     // Then
     List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
-    assertThat(restaurants.stream().filter(r -> r.id().equals(restaurant.id())).toList()).hasSize(1);
+    assertThat(restaurants.stream().filter(r -> r.id().equals(restaurant.id())).toList())
+        .hasSize(1);
   }
 
   @ParameterizedTest
