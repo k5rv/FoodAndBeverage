@@ -15,13 +15,13 @@ public interface RestaurantClient {
 
   @DeleteMapping(path = "restaurant/{restaurant_id}")
   DeleteRestaurantResponse deleteRestaurant(
-      @PathVariable(value = "restaurant_id") Integer restaurantId);
+      @PathVariable(value = "restaurant_id") String restaurantId);
 
   @PostMapping(path = "reset")
   ResetResponse reset();
 
   @PatchMapping(path = "restaurant/{restaurant_id}")
   DeleteRestaurantResponse updateRestaurant(
-      @PathVariable(value = "restaurant_id") Integer restaurantId,
+      @PathVariable(value = "restaurant_id") String restaurantId,
       @RequestBody RestaurantDto request);
 }
