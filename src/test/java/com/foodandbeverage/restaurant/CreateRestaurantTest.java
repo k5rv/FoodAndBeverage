@@ -60,15 +60,16 @@ class CreateRestaurantTest {
   }
 
   @Test
-  void itShouldReturnConflictIfRestaurantAlreadyExistWhenCreating() {
+  void itShouldCreateRestaurantIfItIsAlreadyExists() {
     // Given
     RestaurantDto restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
+    // When
+    underTest.createRestaurant(restaurant);
     // Then
-    assertThatThrownBy(() -> underTest.createRestaurant(restaurant))
-        .isExactlyInstanceOf(FeignException.Conflict.class)
-        .hasMessageContaining(STATUS_409)
-        .hasMessageContaining(ERROR_RESTAURANT_WITH_GIVEN_ID_ALREADY_EXIST);
+    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    assertThat(restaurant).isIn(restaurants);
+    assertThat(restaurants.stream().filter(r -> r.id().equals(restaurant.id())).toList()).hasSize(1);
   }
 
   @ParameterizedTest
