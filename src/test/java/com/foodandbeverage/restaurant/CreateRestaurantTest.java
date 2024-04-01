@@ -56,7 +56,7 @@ class CreateRestaurantTest {
   }
 
   @Test
-  void itShouldCreateRestaurantIfItIsAlreadyExists() {
+  void itShouldNotCreateRestaurantIfItIsAlreadyExists() {
     // Given
     RestaurantDto restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
@@ -83,7 +83,7 @@ class CreateRestaurantTest {
           0.1                           I
           2147483648                    I
           """)
-  void itShouldReturnBadRequestIfIdIsIncorrectWhenCreating(String id) {
+  void itShouldReturnBadRequestIfIdIncorrectWhenCreating(String id) {
     // Given
     String name = RestaurantHelper.getRandomName();
     String score = RestaurantHelper.getRandomScore();
@@ -107,7 +107,7 @@ class CreateRestaurantTest {
           null                          I
           !@#$%^&*()-_+={}[]|\\:;"'<>,./I
           """)
-  void itShouldReturnBadRequestIfIdNameIncorrectWhenCreating(String name) {
+  void itShouldReturnBadRequestIfNameIncorrectWhenCreating(String name) {
     // Given
     String id = RestaurantHelper.getRandomId();
     String score = RestaurantHelper.getRandomScore();
@@ -131,7 +131,7 @@ class CreateRestaurantTest {
           null                          I
           !@#$%^&*()-_+={}[]|\\:;"'<>,./I
           """)
-  void itShouldReturnBadRequestIfIAddressIncorrectWhenCreating(String address) {
+  void itShouldReturnBadRequestIfAddressIncorrectWhenCreating(String address) {
     // Given
     String id = RestaurantHelper.getRandomId();
     String name = RestaurantHelper.getRandomName();

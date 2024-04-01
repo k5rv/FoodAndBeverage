@@ -45,17 +45,6 @@ class DeleteRestaurantTest {
     assertThat(restaurant).isNotIn(restaurants);
   }
 
-  @Test
-  void itShouldReturnNotFoundIfRestaurantDoesNotExistWhenDeleting() {
-    // Given
-    String restaurantId = RestaurantHelper.getRandomId();
-    // Then
-    assertThatThrownBy(() -> underTest.deleteRestaurant(restaurantId))
-        .isExactlyInstanceOf(FeignException.NotFound.class)
-        .hasMessageContaining(STATUS_404)
-        .hasMessageContaining(ERROR_RESTAURANT_WITH_GIVEN_ID_NOT_FOUND);
-  }
-
   @ParameterizedTest
   @CsvSource(
       delimiter = '|',

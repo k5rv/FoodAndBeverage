@@ -105,7 +105,7 @@ class UpdateRestaurantTest {
           0.1                           I
           !@#$%^&*()-_+={}[]|\\:;"'<>,./I
           """)
-  void itShouldReturnNotFoundIfRestaurantIdDoesNotExistWhenUpdating(String id) {
+  void itShouldReturnNotFoundIfRestaurantDoesNotExistWhenUpdating(String id) {
     // Given
     RestaurantDto restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
