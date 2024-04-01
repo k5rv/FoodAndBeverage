@@ -1,9 +1,9 @@
-package com.foodandbeverage.restaurant;
+package com.foodandbeverage.api;
 
 import static org.assertj.core.api.Assertions.*;
 
 import com.foodandbeverage.client.RestaurantClient;
-import com.foodandbeverage.dto.RestaurantDto;
+import com.foodandbeverage.dto.Restaurant;
 import com.foodandbeverage.helper.RestaurantHelper;
 import com.foodandbeverage.mapper.RestaurantMapper;
 import feign.FeignException;
@@ -36,12 +36,12 @@ class DeleteRestaurantTest {
   @Test
   void itShouldDeleteRestaurant() {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     // When
     underTest.deleteRestaurant(restaurant.id());
     // Then
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isNotIn(restaurants);
   }
 

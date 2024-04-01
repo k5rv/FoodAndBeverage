@@ -6,4 +6,4 @@ import lombok.Builder;
 
 @Builder
 public record GetRestaurantsResponse(
-    Boolean success, @JsonProperty("data") List<RestaurantDto> restaurantDtos) {}
+    Boolean success, @JsonProperty("data") List<Restaurant> restaurants) {}

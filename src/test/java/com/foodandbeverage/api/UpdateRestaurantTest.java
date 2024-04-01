@@ -1,9 +1,9 @@
-package com.foodandbeverage.restaurant;
+package com.foodandbeverage.api;
 
 import static org.assertj.core.api.Assertions.*;
 
 import com.foodandbeverage.client.RestaurantClient;
-import com.foodandbeverage.dto.RestaurantDto;
+import com.foodandbeverage.dto.Restaurant;
 import com.foodandbeverage.helper.RestaurantHelper;
 import com.foodandbeverage.mapper.RestaurantMapper;
 import feign.FeignException;
@@ -49,14 +49,14 @@ class UpdateRestaurantTest {
           """)
   void itShouldUpdateRestaurant(String name, String score, String address) {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     String id = restaurant.id();
     String nameUpdate = name == null ? null : restaurant.name();
     String scoreUpdate = score == null ? null : restaurant.score();
     String addressUpdate = address == null ? null : restaurant.address();
-    RestaurantDto restaurantUpdate =
-        RestaurantDto.builder()
+    Restaurant restaurantUpdate =
+        Restaurant.builder()
             .id(id)
             .name(nameUpdate)
             .score(scoreUpdate)
@@ -69,21 +69,21 @@ class UpdateRestaurantTest {
     String scoreExpected = scoreUpdate == null ? restaurant.score() : restaurantUpdate.score();
     String addressExpected =
         addressUpdate == null ? restaurant.address() : restaurantUpdate.address();
-    RestaurantDto restaurantExpected =
-        RestaurantDto.builder()
+    Restaurant restaurantExpected =
+        Restaurant.builder()
             .id(id)
             .name(nameExpected)
             .score(scoreExpected)
             .address(addressExpected)
             .build();
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurantExpected).isIn(restaurants);
   }
 
   @Test
   void itShouldReturnNotFoundIfRestaurantDoesNotExistWhenUpdating() {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     // Then
     assertThatThrownBy(() -> underTest.updateRestaurant(restaurant.id(), restaurant))
         .isExactlyInstanceOf(FeignException.NotFound.class)
@@ -107,7 +107,7 @@ class UpdateRestaurantTest {
           """)
   void itShouldReturnNotFoundIfRestaurantDoesNotExistWhenUpdating(String id) {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     // Then
     assertThatThrownBy(() -> underTest.updateRestaurant(id, restaurant))
@@ -119,13 +119,13 @@ class UpdateRestaurantTest {
   @Test
   void itShouldNotUpdateRestaurantId() {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     String id = restaurant.id();
     String idUpdate = RestaurantHelper.getRandomId();
     String nameUpdate = RestaurantHelper.getRandomName();
-    RestaurantDto restaurantUpdate =
-        RestaurantDto.builder()
+    Restaurant restaurantUpdate =
+        Restaurant.builder()
             .id(idUpdate)
             .name(nameUpdate)
             .score(restaurant.score())
@@ -133,7 +133,7 @@ class UpdateRestaurantTest {
             .build();
     // Then
     underTest.updateRestaurant(id, restaurantUpdate);
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
     assertThat(restaurantUpdate).isNotIn(restaurants);
   }
@@ -149,16 +149,16 @@ class UpdateRestaurantTest {
           """)
   void itShouldNotUpdateIfNameIsIncorrect(String name) {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     String id = restaurant.id();
     String score = restaurant.score();
     String addressUpdate = RestaurantHelper.getRandomAddress();
-    RestaurantDto restaurantUpdate =
-        RestaurantDto.builder().id(id).name(name).score(score).address(addressUpdate).build();
+    Restaurant restaurantUpdate =
+        Restaurant.builder().id(id).name(name).score(score).address(addressUpdate).build();
     // Then
     underTest.updateRestaurant(id, restaurantUpdate);
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
     assertThat(restaurantUpdate).isNotIn(restaurants);
   }
@@ -179,16 +179,16 @@ class UpdateRestaurantTest {
           """)
   void itShouldNotUpdateIfScoreIsIncorrect(String score) {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     String id = restaurant.id();
     String name = restaurant.name();
     String addressUpdate = RestaurantHelper.getRandomAddress();
-    RestaurantDto restaurantUpdate =
-        RestaurantDto.builder().id(id).name(name).score(score).address(addressUpdate).build();
+    Restaurant restaurantUpdate =
+        Restaurant.builder().id(id).name(name).score(score).address(addressUpdate).build();
     // Then
     underTest.updateRestaurant(id, restaurantUpdate);
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
     assertThat(restaurantUpdate).isNotIn(restaurants);
   }
@@ -204,16 +204,16 @@ class UpdateRestaurantTest {
           """)
   void itShouldNotUpdateIfAddressIsIncorrect(String address) {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     String id = restaurant.id();
     String score = restaurant.score();
     String nameUpdate = RestaurantHelper.getRandomName();
-    RestaurantDto restaurantUpdate =
-        RestaurantDto.builder().id(id).name(nameUpdate).score(score).address(address).build();
+    Restaurant restaurantUpdate =
+        Restaurant.builder().id(id).name(nameUpdate).score(score).address(address).build();
     // Then
     underTest.updateRestaurant(id, restaurantUpdate);
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
     assertThat(restaurantUpdate).isNotIn(restaurants);
   }

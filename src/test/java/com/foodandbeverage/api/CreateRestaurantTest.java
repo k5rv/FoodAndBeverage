@@ -1,9 +1,9 @@
-package com.foodandbeverage.restaurant;
+package com.foodandbeverage.api;
 
 import static org.assertj.core.api.Assertions.*;
 
 import com.foodandbeverage.client.RestaurantClient;
-import com.foodandbeverage.dto.RestaurantDto;
+import com.foodandbeverage.dto.Restaurant;
 import com.foodandbeverage.helper.RestaurantHelper;
 import com.foodandbeverage.mapper.RestaurantMapper;
 import feign.FeignException;
@@ -46,24 +46,24 @@ class CreateRestaurantTest {
           """)
   void itShouldCreateRestaurant(String id, String name, String score, String address) {
     // Given
-    RestaurantDto restaurant =
-        RestaurantDto.builder().id(id).name(name).score(score).address(address).build();
+    Restaurant restaurant =
+        Restaurant.builder().id(id).name(name).score(score).address(address).build();
     // When
     underTest.createRestaurant(restaurant);
     // Then
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
   }
 
   @Test
   void itShouldNotCreateRestaurantIfItIsAlreadyExists() {
     // Given
-    RestaurantDto restaurant = RestaurantHelper.getRestaurant();
+    Restaurant restaurant = RestaurantHelper.getRestaurant();
     underTest.createRestaurant(restaurant);
     // When
     underTest.createRestaurant(restaurant);
     // Then
-    List<RestaurantDto> restaurants = mapper.toDtos(underTest.getRestaurants());
+    List<Restaurant> restaurants = mapper.toDtos(underTest.getRestaurants());
     assertThat(restaurant).isIn(restaurants);
     assertThat(restaurants.stream().filter(r -> r.id().equals(restaurant.id())).toList())
         .hasSize(1);
@@ -88,8 +88,8 @@ class CreateRestaurantTest {
     String name = RestaurantHelper.getRandomName();
     String score = RestaurantHelper.getRandomScore();
     String address = RestaurantHelper.getRandomAddress();
-    RestaurantDto restaurant =
-        RestaurantDto.builder().id(id).name(name).score(score).address(address).build();
+    Restaurant restaurant =
+        Restaurant.builder().id(id).name(name).score(score).address(address).build();
     // Then
     assertThatThrownBy(() -> underTest.createRestaurant(restaurant))
         .isExactlyInstanceOf(FeignException.BadRequest.class)
@@ -112,8 +112,8 @@ class CreateRestaurantTest {
     String id = RestaurantHelper.getRandomId();
     String score = RestaurantHelper.getRandomScore();
     String address = RestaurantHelper.getRandomAddress();
-    RestaurantDto restaurant =
-        RestaurantDto.builder().id(id).name(name).score(score).address(address).build();
+    Restaurant restaurant =
+        Restaurant.builder().id(id).name(name).score(score).address(address).build();
     // Then
     assertThatThrownBy(() -> underTest.createRestaurant(restaurant))
         .isExactlyInstanceOf(FeignException.BadRequest.class)
@@ -136,8 +136,8 @@ class CreateRestaurantTest {
     String id = RestaurantHelper.getRandomId();
     String name = RestaurantHelper.getRandomName();
     String score = RestaurantHelper.getRandomScore();
-    RestaurantDto restaurant =
-        RestaurantDto.builder().id(id).name(name).score(score).address(address).build();
+    Restaurant restaurant =
+        Restaurant.builder().id(id).name(name).score(score).address(address).build();
     // Then
     assertThatThrownBy(() -> underTest.createRestaurant(restaurant))
         .isExactlyInstanceOf(FeignException.BadRequest.class)
@@ -165,8 +165,8 @@ class CreateRestaurantTest {
     String id = RestaurantHelper.getRandomId();
     String name = RestaurantHelper.getRandomName();
     String address = RestaurantHelper.getRandomAddress();
-    RestaurantDto restaurant =
-        RestaurantDto.builder().id(id).name(name).score(score).address(address).build();
+    Restaurant restaurant =
+        Restaurant.builder().id(id).name(name).score(score).address(address).build();
     // Then
     assertThatThrownBy(() -> underTest.createRestaurant(restaurant))
         .isExactlyInstanceOf(FeignException.BadRequest.class)

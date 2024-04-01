@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public interface RestaurantClient {
 
   @PostMapping(path = "restaurant")
-  CreateRestaurantResponse createRestaurant(@RequestBody RestaurantDto request);
+  CreateRestaurantResponse createRestaurant(@RequestBody Restaurant restaurant);
 
   @GetMapping(path = "restaurants")
   GetRestaurantsResponse getRestaurants();
@@ -22,6 +22,5 @@ public interface RestaurantClient {
 
   @PatchMapping(path = "restaurant/{restaurant_id}")
   DeleteRestaurantResponse updateRestaurant(
-      @PathVariable(value = "restaurant_id") String restaurantId,
-      @RequestBody RestaurantDto request);
+      @PathVariable(value = "restaurant_id") String restaurantId, @RequestBody Restaurant request);
 }
