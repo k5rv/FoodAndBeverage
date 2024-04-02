@@ -85,7 +85,7 @@ public class RestaurantPage extends Page {
         .ifPresent(
             rests -> {
               WebElement deleteRestaurantButton = rests.get(5);
-              deleteRestaurantButton.click();
+              isVisible(deleteRestaurantButton).click();
               isVisible(restaurantActionAlertButton).click();
             });
   }
