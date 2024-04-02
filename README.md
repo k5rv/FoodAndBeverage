@@ -1,4 +1,4 @@
-# Food and beverages services test framework
+# Food and beverage services test framework
 
 ## Description
 This project is a Test Assignment. It includes REST API and UI tests.
@@ -21,9 +21,10 @@ mvn '-Dtest=com.foodandbeverage.ui.*Test' test
 ## Stack
 - Spring Boot
 - Spring Cloud OpenFeign
+- Apache Maven
 - JUnit 5
 - Lombok
 - Mapstruct
-- commons-lang3
+- Apache Commons
 - Selenium
 - WebDriver Manager
