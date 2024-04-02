@@ -10,5 +10,5 @@ spring:
             logger-level: full
 logging:
   level:
-    com.foodandbeverage: INFO
-    com.foodandbeverage.client.RestaurantClient: INFO
+    com.foodandbeverage: ERROR
+    com.foodandbeverage.client.RestaurantClient: ERROR
