@@ -83,8 +83,8 @@ public class RestaurantPage extends Page {
         .filter(fields -> fields.get(1).getText().equals(id))
         .findFirst()
         .ifPresent(
-            rests -> {
-              WebElement deleteRestaurantButton = rests.get(5);
+            fields -> {
+              WebElement deleteRestaurantButton = fields.get(5);
               isVisible(deleteRestaurantButton).click();
               isVisible(restaurantActionAlertButton).click();
             });
